@@ -5,11 +5,13 @@
  */
 package server;
 
+import java.awt.List;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
 
 /**
  *
@@ -26,15 +28,28 @@ public class Server {
             BufferedReader in = 
                 new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
         ){
-            String inputLine, outputLine;
+            String inputLine,output = null; 
+            ArrayList<String> outputLine = new ArrayList<String>();
+            remotedir rd = new remotedir();
             //menginisiasi hubungan dengan client
-            outputLine = "test server";
+            outputLine.add(0,"terhubungan dengan server");
             out.println(outputLine);
-            
+            outputLine.remove(0);
             while ((inputLine = in.readLine()) != null){
-                outputLine = "bye.";
-                out.println(outputLine);
-                if (outputLine.equals("bye."))
+                int x = 0;
+                System.out.println("test");
+                outputLine = rd.inputcode(x,inputLine);
+                //outputLine.add(x,"Bye.");
+                //System.out.println(outputLine);
+                x = outputLine.size();
+                //for(int i = 0 ; i <= x ; i++){
+                //    System.out.println("test1");
+                //    output = outputLine.get(i);
+                    out.println(outputLine);
+                    //outputLine.remove(i);
+                    outputLine.clear();
+                //}
+                if (output.equals("Bye."))
                     break;
             } 
         } catch (Exception e) {

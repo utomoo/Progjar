@@ -29,12 +29,26 @@ public class Client {
                     new BufferedReader(new InputStreamReader(System.in));
                 String fromServer;
                 String fromUser;
+                int len;
 
                 while ((fromServer = in.readLine()) != null) {
+                    /*while(true){
+                        System.out.println("test3");
+                        System.out.println("Server: " + fromServer);
+                        System.out.println("test4");
+                        if((fromServer = in.readLine()) == null || (fromServer = in.readLine()).equals("Bye.")){
+                            System.out.println("test5");
+                            break;
+                        }
+                        System.out.println("test6");
+                    }*/
                     System.out.println("Server: " + fromServer);
-                    if (fromServer.equals("Bye."))
+                    if (fromServer.equals("[Bye.]")){
                         break;
-
+                    }
+                    //System.out.println("Server: " + fromServer);
+                    System.out.println("test2");
+                    
                     fromUser = stdIn.readLine();
                     if (fromUser != null) {
                         System.out.println("Client: " + fromUser);
