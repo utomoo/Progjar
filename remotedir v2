@@ -31,16 +31,18 @@ public class remotedir {
                 System.out.println(files[i]);
             }
           if(theInput.equalsIgnoreCase("mkdir")){
-                    File file2 = new File("C:\\Directory1");
+                File file2 = new File(dir +"Directory1");
                 if (!file2.exists()) {
 		if (file2.mkdir()) {
+                        theOutput.add(0,"Directory is created!");
 			System.out.println("Directory is created!");
 		} 
                     else {
+                        theOutput.add(0,"Failed to create directory!");
 			System.out.println("Failed to create directory!");
 		}
 
-                    }
+                }
         }
         else{
             theOutput.add(0,"Bye.");
