@@ -1,0 +1,155 @@
+import java.awt.Color;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
+import java.util.BitSet;
+
+/**
+ *
+ * @author stanz
+ */
+public abstract class Ants extends Game {
+
+    int characterSize = 20;
+    int x ,y;
+    BitSet keyBits = new BitSet(256);
+    boolean A = false;
+    boolean D = false;
+    boolean W = false;
+    boolean S = false;
+    final int step =  5;
+
+    Ants() {
+        title= "Ants";
+        width = 400;
+        height= 400;
+
+        x= (width /2) - (characterSize /2);
+        y= (height /2) - (characterSize /2);
+        }
+    
+    @Override
+    public void update(){
+        if (A && S){
+            moveLD();
+        }
+        else if(A && W){
+            moveLU();
+        }
+        else if(A){
+            moveL();
+        }
+        else if(D && S){
+            moveRD();
+        }
+        else if(D && W){
+            moveRU();
+        }
+        else if(D){
+            moveR();
+        }
+        else if(S){
+            moveD();
+        }
+        else if(W){
+            moveU();
+        }
+    }
+    
+    @Override
+    public void draw(Graphics2D g){
+        RenderingHints rh= new RenderingHints(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON) ;
+        rh.put(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+        g.setRenderingHints(rh);
+        g.setColor(Color.WHITE);
+               g.fillRect(0,0, width, height);
+               
+               g.setColor(Color.BLACK);
+               g.fillOval(x,y, characterSize, characterSize);
+                }
+    
+    @Override
+    public void keyPressed(KeyEvent e)
+    {
+        switch (e.getKeyCode()){
+            case KeyEvent.VK_A:
+                A= true;
+                break;
+            case KeyEvent.VK_D:
+                D= true;
+                break;
+            case KeyEvent.VK_W:
+                W= true;
+                break;
+            case KeyEvent.VK_S:
+                S= true;
+                break;
+             
+        }
+    }
+    
+        @Override
+    public void keyReleased(KeyEvent e)
+    {
+        switch (e.getKeyCode()){
+            case KeyEvent.VK_A:
+                A= false;
+                break;
+            case KeyEvent.VK_D:
+                D= false;
+                break;
+            case KeyEvent.VK_W:
+                W= false;
+                break;
+            case KeyEvent.VK_S:
+                S= false;
+                break;
+             
+        }
+    }
+    
+    public static void main(String[] args){
+        GameApplication.start(new Ants() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+        });
+      
+    }
+    
+    private void moveLD(){
+        x-=step;
+        y+=step;
+    }
+    private void moveLU(){
+        x-=step;
+        y-=step;
+    }
+    private void moveL(){
+        x-=step;
+  
+    }
+    private void moveRD(){
+        x+=step;
+        y+=step;
+    }
+    private void moveRU(){
+        x+=step;
+        y-=step;
+    }
+    private void moveR(){
+        x+=step;
+  
+    }
+    private void moveD(){
+        y+=step;
+  
+    }
+    private void moveU(){
+        y-=step;
+  
+    }
+    
+}
