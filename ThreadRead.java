@@ -34,8 +34,10 @@ public class ThreadRead implements Runnable{
     int statenewuser=0;
     int stateAwal = 0;
     int ourHP;
-    int enemyHP;
+    String enemyHP;
     int flag = 0;
+    int x;
+    int y;
     
     public ThreadRead(Socket socket, javax.swing.JTextArea chatTextArea, String Username, JLabel jLabel2, JLabel jLabel5, JLabel jLabel8) throws IOException {
         this.socket = socket;
@@ -77,13 +79,16 @@ public class ThreadRead implements Runnable{
                             } else {
                                 System.out.println("masukNewUser");
                                 newuser = msg.getSender();
-                                statenewuser = 1;
                                 System.out.println(statenewuser);
                                 objMsg.setMessage("hello");
                                 objMsg.setSender(this.username);
                                 send(objMsg);
-                                enemName.setText(pengirim);
-                                enemHp.setText(temp3);
+                                newuser = pengirim;
+                                enemyHP = temp3;
+                                //enemName.setText(pengirim);
+                                //enemHp.setText(temp3);
+                                statenewuser = 1;
+                                System.out.println(statenewuser);
                             }
                         }
                         if(stateAwal == 0){
@@ -95,8 +100,10 @@ public class ThreadRead implements Runnable{
                                     newuser = msg.getSender();
                                     statenewuser = 1;
                                     System.out.println(statenewuser);
-                                    enemName.setText(pengirim);
-                                    enemHp.setText(temp3);
+                                    newuser = pengirim;
+                                    enemyHP = temp3;
+                                    //enemName.setText(pengirim);
+                                    //enemHp.setText(temp3);
                                     flag=1;
                                 }
                             }
@@ -136,8 +143,15 @@ public class ThreadRead implements Runnable{
                                         myHp.setText(darah);
                                     }
                                 }
-                                
-                                
+                            }
+                        }
+                        if(split[0].equals("x:")){
+                            if(pengirim.equals(this.username)){
+                            } else {
+                                int i=Integer.parseInt(split[1]);
+                                x = i;
+                                i=Integer.parseInt(split[3]);
+                                y = i;
                             }
                         }
                         System.out.println(msg.getSender() + " : " + msg.getMessage());
