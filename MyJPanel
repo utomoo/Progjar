@@ -27,9 +27,9 @@ public class MyJPanel extends JPanel{
 
     private int x = 0;
     private int y = 0;
-    private int[] aktif = new int[10];
-    private int[] x1 = new int[10];
-    private int[] x2 = new int[10];
+    int[] aktif = new int[10];
+    int[] x1 = new int[10];
+    int[] x2 = new int[10];
     
     private int player = 0;
     
@@ -84,5 +84,13 @@ public class MyJPanel extends JPanel{
     public void newUser(int nomorUrut){
         player++;
         aktif[nomorUrut] = 1;
+    }
+    
+    public int getX(){
+        return(this.x);
+    }
+    
+    public int getY(){
+        return(this.y);
     }
 }
