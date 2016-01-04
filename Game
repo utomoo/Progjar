@@ -25,21 +25,22 @@ class Game extends JFrame implements Runnable, KeyListener{
     private MyJPanel panel;
     private Socket socket;
     private String[] alClients = new String[10];
-    ThreadRead tr;
-    private ObjectInputStream ois;
-    private ObjectOutputStream ous;
     String username = null;
     String newuser = null;
     int statenewuser=0;
     int stateAwal = 0;
     Message objMsg = new Message();
     private boolean done;
+    ThreadRead tr;
+    PokemonGUI gui;
+    public int x;
+    public int y;
+    public int x1;
+    public int x2;
 
-    Game(Socket socket, ThreadRead tr, String Username) throws IOException{
+    Game(Socket socket, ThreadRead tr, String Username, PokemonGUI aThis) throws IOException{
         super();
         this.socket = socket;
-        this.ois = new ObjectInputStream(this.socket.getInputStream());
-        this.ous = new ObjectOutputStream(this.socket.getOutputStream());
         panel = new MyJPanel();
         this.tr = tr;
         add(panel);
@@ -47,82 +48,35 @@ class Game extends JFrame implements Runnable, KeyListener{
         addKeyListener(this);
         repaint();
         this.username = Username;
+        this.gui=aThis;
     }
 
     @Override
     public void run() {
-        try {
-            setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            setVisible(true);
-            setTitle("Test");
-            while(!this.done){
-                try {
-                    Object incoming = this.ois.readObject();
-                    if(incoming instanceof Message) {
-                        Message msg = (Message) incoming;
-                        String pesan = msg.getMessage();
-                        String pengirim = msg.getSender();
-                        
-                        if(pesan.equals("newuser")){
-                            if(pengirim.equals(this.username)){
-                            } else {
-                                System.out.println("masukNewUser");
-                                newuser = msg.getSender();
-                                statenewuser = 1;
-                                System.out.println(statenewuser);
-                                objMsg.setMessage("hello");
-                                objMsg.setSender(this.username);
-                                tr.send(objMsg);
-                            }
-                        }
-                        if(stateAwal == 0){
-                            System.out.println(pengirim);
-                            if(pesan.equals("hello")){
-                                if(pengirim.equals(this.username)){
-                                } else {
-                                    newuser = msg.getSender();
-                                    statenewuser = 1;
-                                    System.out.println(statenewuser);
-                                }
-                            }
-                            if(!pesan.equals("hello")){
-                                stateAwal = 1;
-                            }
-                        }
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setVisible(true);
+        setTitle("Test");
+        while(true){
+            //System.out.println(tr.statenewuser);
+            if(tr.statenewuser == 1){
+                System.out.println("masukstate");
+                for(int i = 0; i < 10; i++){
+                    if(alClients[i]==null){
+                        System.out.println("tambahUser");
+                        alClients[i]=tr.newuser;
+                        System.out.println(alClients[i]);
+                        panel.newUser(i);
+                        break;
                     }
-                    else if(incoming instanceof AnotherMessage)
-                    {
-                        AnotherMessage msg = (AnotherMessage) incoming;
-                        objMsg.setMessage("newuser");
-                        objMsg.setSender(this.username);
-                        tr.send(objMsg);
-                    }
-                } catch (IOException|ClassNotFoundException ex) {
-                    this.done = true;
-                    Logger.getLogger(ThreadRead.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                //System.out.println(tr.statenewuser);
-                if(statenewuser == 1){
-                    System.out.println("masukstate");
-                    for(int i = 0; i < 10; i++){
-                        if(alClients[i].isEmpty()){
-                            System.out.println("tambahUser");
-                            alClients[i]=tr.newuser;
-                            System.out.println(alClients[i]);
-                            panel.newUser(i);
-                            break;
-                        }
-                    }
-                    tr.statenewuser = 0;
-                    repaint();
-                }
+                tr.statenewuser = 0;
+                repaint();
             }
-            System.out.println("Bye");
-            this.ois.close();
-            this.ous.close();
-            this.socket.close();
-        } catch (IOException ex) {
-            Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+            panel.x1[0] = tr.x;
+            panel.x2[0] = tr.y;
+            x1 = tr.x;
+            x2 = tr.y;
+            repaint();
         }
     }
     @Override
@@ -134,6 +88,17 @@ class Game extends JFrame implements Runnable, KeyListener{
     public void keyPressed(KeyEvent e) {
         panel.keyPressed(e);
         repaint();
+        try {
+            String msg = "x: " + panel.getX() + " y: " + panel.getY() ;
+            Message objMsg = new Message();
+            objMsg.setMessage(msg);
+            objMsg.setSender(username);
+            tr.send(objMsg);
+        } catch (IOException ex) {
+            Logger.getLogger(PokemonGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        x = panel.getX();
+        y = panel.getY();
     }
 
     @Override
