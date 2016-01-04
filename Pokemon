@@ -1,0 +1,101 @@
+package Pokemon;
+
+public class pokemon {
+
+    String Nama; 
+    int Health;
+    int Attack1;
+    int Attack2;
+    int Attack3;
+    int buff;
+    int exp;
+    String Skill1;
+    String Skill2;
+    String Skill3;
+    String Skill4;
+    String Ket1;
+    String Ket2;
+    String Ket3;
+    String Ket4;
+    
+    
+    public pokemon(String name){
+      if(name.equals("Pikachu"))
+      {
+          Pikachu P = new Pikachu(); 
+          Nama = name;
+          Health = P.get_health();
+          Attack1 = P.get_att1();
+          Attack2 = P.get_att2();
+          Attack3 = P.get_att3();
+          Skill1 = P.get_skill1();
+          Skill2 = P.get_skill2();
+          Skill3 = P.get_skill3();
+          Skill4 = P.get_skill4();
+          Ket1=P.get_ket1();
+          Ket2=P.get_ket2();
+          Ket3=P.get_ket3();
+          Ket4=P.get_ket4();
+          buff=P.get_buff();
+          exp=P.get_exp();   
+      }
+      else if(name.equals("Squirtle"))
+      {
+          Squirtle S = new Squirtle(); 
+          Nama = name;
+          Health = S.get_health();
+          Attack1 = S.get_att1();
+          Attack2 = S.get_att2();
+          Attack3 = S.get_att3();
+          Skill1 = S.get_skill1();
+          Skill2 = S.get_skill2();
+          Skill3 = S.get_skill3();
+          Skill4 = S.get_skill4();
+          Ket1=S.get_ket1();
+          Ket2=S.get_ket2();
+          Ket3=S.get_ket3();
+          Ket4=S.get_ket4();
+          buff=S.get_buff();
+          exp=S.get_exp();
+      }
+      else if(name.equals("Bulbasaur"))
+      {
+          Bulbasaur B = new Bulbasaur(); 
+          Nama = name;
+          Health = B.get_health();
+          Attack1 = B.get_att1();
+          Attack2 = B.get_att2();
+          Attack3 = B.get_att3();
+          Skill1 = B.get_skill1();
+          Skill2 = B.get_skill2();
+          Skill3 = B.get_skill3();
+          Skill4 = B.get_skill4();
+          Ket1=B.get_ket1();
+          Ket2=B.get_ket2();
+          Ket3=B.get_ket3();
+          Ket4=B.get_ket4();
+          buff=B.get_buff();
+          exp=B.get_exp();
+      }
+      else if(name.equals("Charmander"))
+      {
+          Charmander C = new Charmander(); 
+          Nama = name;
+          Health = C.get_health();
+          Attack1 = C.get_att1();
+          Attack2 = C.get_att2();
+          Attack3 = C.get_att3();
+          Skill1 = C.get_skill1();
+          Skill2 = C.get_skill2();
+          Skill3 = C.get_skill3();
+          Skill4 = C.get_skill4();
+          Ket1=C.get_ket1();
+          Ket2=C.get_ket2();
+          Ket3=C.get_ket3();
+          Ket4=C.get_ket4();
+          buff=C.get_buff();
+          exp=C.get_exp();
+      }
+   }
+
+}
