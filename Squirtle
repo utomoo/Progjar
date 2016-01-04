@@ -1,0 +1,64 @@
+
+package Pokemon;
+
+public class Squirtle {
+    int Health =1000;
+    int Attack1 =90;
+    int Attack2 =110;
+    int Attack3 =130;
+    int buff= 15;
+    int exp=0;
+    String Skill1 = "Tackle";
+    String Skill2 = "Water Gun";
+    String Skill3 = "Hydro Pump";
+    String Skill4 = "Torrent";
+    String Ket1 ="Basic Tackle Attack";
+    String Ket2 ="Intermediate Attack using Water element";
+    String Ket3 ="Strong Attack using water element";
+    String Ket4 ="Torrent increase Atk by 15%.";
+    
+    
+    public int get_health(){
+        return Health;
+    }
+    public int get_att1(){
+        return Attack1;
+    }
+    public int get_att2(){
+        return Attack2;
+    }
+    public int get_att3(){
+        return Attack3;
+    }
+    public String get_skill1(){
+        return Skill1;
+    }
+    public String get_skill2(){
+        return Skill2;
+    }
+    public String get_skill3(){
+        return Skill3;
+    }
+    public String get_skill4(){
+        return Skill4;
+    }
+    public int get_exp(){
+        return exp;
+    }
+    public int get_buff(){
+        return buff;
+    }
+    public String get_ket1(){
+        return Ket1;
+    }
+    public String get_ket2(){
+        return Ket2;
+    }
+    public String get_ket3(){
+        return Ket3;
+    }
+    public String get_ket4(){
+        return Ket4;
+    }
+    
+}
