@@ -63,7 +63,7 @@ public class PokemonGUI extends javax.swing.JFrame {
             tr = new ThreadRead(socket,chatTextArea, username, jLabel2, jLabel5, jLabel8);
             t = new Thread(tr);
             t.start();
-            //walking_Ball();
+            walking_Ball();
         } catch (IOException ex) {
             Logger.getLogger(PokemonGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -73,7 +73,7 @@ public class PokemonGUI extends javax.swing.JFrame {
     private void walking_Ball() throws IOException {
          //set game
         //game = new Game(gamePanel);
-        game = new Game(socket, tr, username);
+        game = new Game(socket, tr, username, this);
         b = new Thread((Runnable) game);
         b.start();
         
@@ -417,7 +417,13 @@ public class PokemonGUI extends javax.swing.JFrame {
     }// </editor-fold>                        
 
     private void readyBUttonActionPerformed(java.awt.event.ActionEvent evt) {                                            
-
+        if(game.x == game.x1 && game.y == game.x2){
+            jLabel5.setText(tr.enemyHP);
+            jLabel8.setText(tr.newuser);
+        }
+        else{
+            System.out.println("kordinat belum sama");
+        }
     }                                           
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
